@@ -1,0 +1,1 @@
+cmd_/root/android/workspace/word_count/word_count.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.11.0-15-generic/scripts/module-common.lds --build-id  -o /root/android/workspace/word_count/word_count.ko /root/android/workspace/word_count/word_count.o /root/android/workspace/word_count/word_count.mod.o
