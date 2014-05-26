@@ -18,3 +18,8 @@ static void word_count_exit(void)
 
 module_init(word_count_init);
 module_exit(word_count_exit);
+
+MODULE_AUTHOR("MC");
+MODULE_DESCRIPTION("statistics of word count.");
+MODULE_ALIAS("word count module.");
+MODULE_LICENSE("GPL");
