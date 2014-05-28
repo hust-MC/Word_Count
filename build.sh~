@@ -1,0 +1,4 @@
+# build.sh
+
+make-driver M=$MY_DEST
+insmod $MY_DEST/word_count.ko
