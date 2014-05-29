@@ -30,10 +30,8 @@ static int get_count(char *buf)
     char flag = FALSE,headFlag = TRUE;
     int n = 0, i = 0;
 
-
     while(buf[i] != '\0')
     {
-
         if(is_spacewhite(buf[i]))
         {
             if(headFlag)
@@ -55,36 +53,31 @@ static int get_count(char *buf)
         i++;
     }
 
-    return n;
+    if (is_spacewhite(buf[i-1]))
+        n--;
+    return n+1;
 }
 
 static ssize_t word_count_read(struct file *file, char __user *buf, size_t count , loff_t *ppos)
 {
     unsigned char temp[4];
-    if(read_flag == 'n')
-    {
-        temp[0] = word_count >> 24;
-        temp[1] = word_count >> 16;
-        temp[2] = word_count >> 8;
-        temp[3] = word_count;
+    temp[0] = word_count >> 24;
+    temp[1] = word_count >> 16;
+    temp[2] = word_count >> 8;
+    temp[3] = word_count;
 
-        copy_to_user(buf, (void*) temp, 4);
+    copy_to_user(buf, (void*) temp, 4);
 
-        printk("read count:%d\n", (int) word_count);
+    printk("read count:%d\n", (int) word_count);
 
-        read_flag = 'y';
-        return word_count;
-    }
-    else
-    {
-        return 0;
-    }
+    read_flag = 'y';
+    return word_count;
 }
 
 static ssize_t word_count_write(struct file *file, const char __user *buf, size_t count , loff_t *ppos)
 {
     copy_from_user(mem, buf, count);
-    read_flag = 'n';
+
     mem[count] = '\0';
     word_count = get_count(mem);
     printk("write count:%d\n",(int) word_count);
