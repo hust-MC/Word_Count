@@ -1,0 +1,5 @@
+config WORD_COUNT
+	tristate "word_count driver"
+	default Y
+	help
+		This is a word count.

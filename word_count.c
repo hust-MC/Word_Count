@@ -77,7 +77,6 @@ static ssize_t word_count_read(struct file *file, char __user *buf, size_t count
 static ssize_t word_count_write(struct file *file, const char __user *buf, size_t count , loff_t *ppos)
 {
     copy_from_user(mem, buf, count);
-
     mem[count] = '\0';
     word_count = get_count(mem);
     printk("write count:%d\n",(int) word_count);
